@@ -1,0 +1,1 @@
+javascript-obfuscator ./js -o ./obf
