@@ -19,7 +19,7 @@ function authenticate(JMStr) {
 
     meetInfo = res.Data;
 
-    if (meetInfo.IsZCR && isPC() && meetInfo.YE > -500 && meetInfo.YE >= 0) {
+    if (meetInfo.IsZCR && isPC() && meetInfo.YE > -500 && meetInfo.YE <= 0) {
       qianfeitixing();
     }
 
@@ -180,14 +180,13 @@ function authenticate(JMStr) {
 function qianfeitixing() {
   $('section').append(tipsEl());
   function tipsEl() {
-    const zjrNameElHeight = $(`#zjr_video [id^='profile_']`).height();
     return `
     <div
     id="arrearage-panel"
     style="
       position: absolute;
       left: 0;
-      bottom: ${zjrNameElHeight + 10}px;
+      bottom: 38px;
       padding: 5px 13px;
       background: rgba(244, 234, 42, 0.4);
       display: flex;
@@ -1709,7 +1708,7 @@ const preDeviceState = (() => {
 function roomIsAbnormal() {
   roomDetail.UserList.length == 0 && location.reload();
   if (!getUserInfo()) {
-    layer.msg('您已被强制退出视频连线', { icon: 2 });
+    layer.alert('您已被强制退出视频连线', { icon: 2 });
     setTimeout(() => {
       leave();
     }, 1000);

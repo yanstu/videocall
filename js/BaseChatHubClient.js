@@ -405,20 +405,19 @@ class BaseChatHubClient {
      * @function
      */
     xintiaolianjie: () => {
-      this.tongjixintiaoTimer && clearInterval(this.tongjixintiaoTimer);
-      this.tongjixintiaoTimer = setInterval(() => {
+      const fasongxintiao = () => {
         huoqudingyueshu().then((Data) => {
           // 用自己的服务器测试心跳用
           /*window.LibGenerateTestUserSig &&
-            $.ajax({
-              type: 'post',
-              url: 'https://114.132.78.52:8081/api/xintiao',
-              data: Data,
-              dataType: 'json',
-              async: false,
-              cache: false,
-              contentType: 'application/x-www-form-urlencoded',
-            });*/
+              $.ajax({
+                type: 'post',
+                url: 'https://114.132.78.52:8081/api/xintiao',
+                data: Data,
+                dataType: 'json',
+                async: false,
+                cache: false,
+                contentType: 'application/x-www-form-urlencoded',
+              });*/
           !window.LibGenerateTestUserSig &&
             this.redisFB({
               reCode: '25',
@@ -431,11 +430,16 @@ class BaseChatHubClient {
               Data,
             });
         });
-      }, 1500);
+      };
+
+      this.tongjixintiaoTimer && clearInterval(this.tongjixintiaoTimer);
+      fasongxintiao();
+      this.tongjixintiaoTimer = setInterval(() => {
+        fasongxintiao();
+      }, 1480);
 
       async function huoqudingyueshu() {
         // 视频连线前端心跳增加参数：订阅音频数（Audio）、订阅标清视频数（SD）、订阅高清视频数（HD）
-        // const manzu =  rtc && rtc.isJoined_ &&  (hasMe() || isZhuBo() || roomDetail.SpeakerID == meetInfo.CHID);
         let CameraState = 0;
         let MicState = 0;
         let ZB = 0;
@@ -477,32 +481,42 @@ class BaseChatHubClient {
         };
 
         if (rtc && rtc.isJoined_) {
-          let userlist = [];
           try {
-            // userlist = await rtc.client_.getUserList()
           } catch (error) {}
-          // if (userlist.length > 1) {
           if (rtc.members_.size > 0) {
             try {
-              const remoteStats = await rtc.client_.getRemoteVideoStats('main');
-              Object.keys(remoteStats).forEach((value, key) => {
+              const remoteVideoStats = await rtc.client_.getRemoteVideoStats(
+                'main'
+              );
+              // const remoteAudioStats = await rtc.client_.getRemoteAudioStats();
+              Object.keys(remoteVideoStats).forEach((value, key) => {
                 const fbl =
-                  remoteStats[value].frameWidth *
-                  remoteStats[value].frameHeight;
+                  remoteVideoStats[value].frameWidth *
+                  remoteVideoStats[value].frameHeight;
                 if (fbl > 1280 * 720) {
                   Data.FullHD++;
                 } else if (fbl > 640 * 480) {
                   Data.HD++;
-                } else if (fbl > 1) {
-                  Data.SD++;
                 } else {
+                  Data.SD++;
+                }
+              });
+              /*Object.keys(remoteAudioStats).forEach((value, key) => {
+                if (!remoteVideoStats[value]) {
                   Data.Audio++;
                 }
               });
               // 如果没有订阅任何人的音视频，将产生音频时长
-              if (Object.keys(remoteStats).length == 0) {
+              if (
+                Object.keys(remoteVideoStats).length == 0 &&
+                Object.keys(remoteAudioStats).length == 0
+              ) {
                 Data.Audio++;
-              }
+              }*/
+              // 如果没有订阅任何人的音视频，将产生音频时长
+              if (Object.keys(remoteVideoStats).length == 0) {
+                Data.Audio++;
+              } 
             } catch (error) {
               console.error('[getRemoteVideoStats] ', error);
             }

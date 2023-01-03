@@ -40,6 +40,10 @@ Inherits="VideoConnectionWeb.ms" %>
         border-right: #393e4b 1px solid !important;
         border-bottom: #393e4b 1px solid !important;
       }
+      .toolbar_btn {
+        padding-bottom: 5px;
+        height: 100%;
+      }
     </style>
   </head>
 
@@ -103,7 +107,7 @@ Inherits="VideoConnectionWeb.ms" %>
       style="height: 9%"
       class="w-full shadow-md flex bg-[#262626] text-white items-center justify-center z-50 mx-auto"
     >
-      <div style="height: 100%" class="toolbar_btn" id="mic_foot_btn">
+      <div class="toolbar_btn" id="mic_foot_btn">
         <div class="svgbox2">
           <svg
             style="font-size: 26px"
@@ -115,7 +119,7 @@ Inherits="VideoConnectionWeb.ms" %>
         </div>
         <span class="mt-1 text-[14px]">静音</span>
       </div>
-      <div style="height: 100%" class="toolbar_btn" id="video_foot_btn">
+      <div class="toolbar_btn" id="video_foot_btn">
         <div class="svgbox2">
           <svg
             style="font-size: 26px"
@@ -127,7 +131,7 @@ Inherits="VideoConnectionWeb.ms" %>
         </div>
         <span class="mt-1 text-[14px]">摄像头</span>
       </div>
-      <div style="height: 100%" class="toolbar_btn" id="fanzhuan_btn">
+      <div class="toolbar_btn" id="fanzhuan_btn">
         <div class="svgbox2">
           <svg
             style="font-size: 25px"
@@ -139,7 +143,7 @@ Inherits="VideoConnectionWeb.ms" %>
         </div>
         <span class="mt-1 text-[14px]">翻转</span>
       </div>
-      <div style="height: 100%" class="toolbar_btn" id="shenqingfayan_foot_btn">
+      <div class="toolbar_btn" id="shenqingfayan_foot_btn">
         <div class="svgbox2">
           <svg
             style="font-size: 23px"
@@ -151,7 +155,7 @@ Inherits="VideoConnectionWeb.ms" %>
         </div>
         <span class="mt-1 text-[14px]">申请发言</span>
       </div>
-      <div style="height: 100%" class="toolbar_btn" id="xiaoxi_foot_btn">
+      <div class="toolbar_btn" id="xiaoxi_foot_btn">
         <div class="relative svgbox2">
           <svg
             style="font-size: 27px"
@@ -168,7 +172,7 @@ Inherits="VideoConnectionWeb.ms" %>
         </div>
         <span class="mt-1 text-[14px]">消息</span>
       </div>
-      <div style="height: 100%" class="toolbar_btn" id="shangyiye_ms_btn">
+      <div class="toolbar_btn" id="shangyiye_ms_btn">
         <div class="svgbox2">
           <svg
             style="font-size: 25px"
@@ -180,7 +184,7 @@ Inherits="VideoConnectionWeb.ms" %>
         </div>
         <span class="mt-1 text-[14px]">上页</span>
       </div>
-      <div style="height: 100%" class="toolbar_btn" id="xiayiye_ms_btn">
+      <div class="toolbar_btn" id="xiayiye_ms_btn">
         <div class="svgbox2">
           <svg
             style="font-size: 25px"

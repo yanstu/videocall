@@ -377,7 +377,7 @@ function jiequtuxiang(userId) {
     setTimeout(() => {
       videoFrame = stream.getVideoFrame();
       if (videoFrame && videoFrame != 'data:,') {
-        $('#mask_' + userId).hide();
+        // $('#mask_' + userId).hide();
         $('#img_' + userId)
           .attr('src', videoFrame)
           .show();

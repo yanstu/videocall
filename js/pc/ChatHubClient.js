@@ -35,7 +35,7 @@ class ChatHubClient extends BaseChatHubClient {
         // 踢出用户
         case '07':
           if (mess.ReUserid == meetInfo.CHID) {
-            layer.msg('您已被强制退出视频连线', { icon: 2 });
+            layer.alert('您已被强制退出视频连线', { icon: 2 });
             setTimeout(() => {
               leave();
             }, 2000);
