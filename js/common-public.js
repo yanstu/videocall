@@ -818,7 +818,7 @@ function closeAllMic() {
 }
 
 /**
- * * 音视频与缓存中的状态同步
+ * * 音视频恢复之前的状态
  */
 function yinshipintongbu() {
   try {
