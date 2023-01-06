@@ -50,6 +50,7 @@ function showOrHide() {
     $('#shenqingfayan_foot_btn').hide();
     $('#fayanliebiao_foot_btn').hide();
     $('#fanzhuan_btn').hide();
+    $('#qiehuanmoshi_foot_btn').hide();
   }
 
   if (isZhuBo() && roomDetail.IsZBMS == MODE_STATE.开启) {

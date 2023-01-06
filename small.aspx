@@ -127,7 +127,7 @@ Inherits="VideoConnectionWeb.small" %>
               <use xlink:href="#icon-maikefeng"></use>
             </svg>
           </div>
-          <span class="mt-1 text-[16px]">静音</span>
+          <span class="mt-1 text-[16px]">麦克风</span>
         </div>
         <div style="width: 5rem" class="toolbar_btn" id="video_foot_btn">
           <div class="svgbox2">
