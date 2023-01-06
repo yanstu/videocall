@@ -190,15 +190,13 @@ svg,
 .pingbao-beijingtupian {
   background-image: url(../img/pbbg.jpg);
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100% 100%;
   width: 100%;
   height: 100%;
-  filter: blur(1px);
+  /* filter: blur(1px); */
 }
 
 .pingbao-container {
-  margin-top: 12%;
-  margin-left: 23%;
   color: white;
   text-shadow: 0 1px #eee;
   position: absolute;
@@ -211,22 +209,33 @@ svg,
   margin-bottom: 2rem;
 }
 
-.pingbao-time,
+.pingbao-time {
+  margin-bottom: 5rem;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .pingbao-tips {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 2rem;
-  font-size: 1rem;
+  font-size: 5rem;
+  padding-bottom: 10px;
+  border-bottom: 2px solid rgb(130, 130, 130);
 }
 
 .goodbtn {
-  font-size: 2rem;
-  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
   border: 1px solid white;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
   cursor: pointer;
-  max-width: 15rem;
   text-align: center;
   position: relative;
   z-index: 1 !important;
+  padding: 0.7rem;
 }
 
 .goodbtn:hover {

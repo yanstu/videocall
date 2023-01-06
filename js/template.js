@@ -357,11 +357,13 @@ function pingbaoElement() {
   return /*html*/ `
   <div id="pingbao" style="display: none;">
     <div class="pingbao-beijingtupian"></div>
-    <div class="pingbao-container">
-      <div class="pingbao-bq">:)</div>
-      <div class="pingbao-tips">会议中场休息</div>
-      <div class="pingbao-time">2022年04月21日 14:31</div>
-      <div onclick="guanbipingbao()" class="goodbtn" id="pingbao-recovery">恢复视频连线</div>
+    <div class="pingbao-container" style="height: 100%;width: 100%;display: flex;justify-content: center;align-items: center;">
+      <div>
+        <!-- <div class="pingbao-bq">:)</div> -->
+        <div class="pingbao-tips">会议中场休息</div>
+        <div class="pingbao-time">2022年04月21日 14:31</div>
+        <div onclick="guanbipingbao()" class="goodbtn" id="pingbao-recovery">恢复视频连线</div>
+      </div>
     </div>
   </div>
   `;

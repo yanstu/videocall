@@ -117,8 +117,6 @@ header {
 }
 
 .pingbao-container {
-  margin-top: 12%;
-  margin-left: 23%;
   color: white;
   text-shadow: 0 1px #eee;
   position: absolute;
@@ -134,7 +132,7 @@ header {
 .pingbao-time,
 .pingbao-tips {
   margin-bottom: 2rem;
-  font-size: 1rem;
+  font-size: 2rem;
 }
 
 .goodbtn {

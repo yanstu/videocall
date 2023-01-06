@@ -1052,6 +1052,7 @@ function kaiqipingbao() {
     pingbaoshifoujinru = true;
     $('#pingbao').fadeIn();
     pingbaoTimeTimer && clearInterval(pingbaoTimeTimer);
+    $('.pingbao-time')[0].innerHTML = getTime();
     pingbaoTimeTimer = setInterval(() => {
       $('.pingbao-time')[0].innerHTML = getTime();
     }, 1000);
