@@ -55,7 +55,8 @@ function authenticate(JMStr) {
       );
     } catch (error) {}
 
-    onlineHeartbeat();
+    seesionHeartbeat();
+    // onlineHeartbeat();
 
     // PC端才展示在线/总人数
     isPC() && initOnlineNumTimer();
@@ -130,15 +131,30 @@ function authenticate(JMStr) {
   }
 
   /**
-   * 在线心跳计时器
+   * seesion登录保持线程
    */
-  function onlineHeartbeat() {
+  function seesionHeartbeat() {
     if (版本.显示端()) return;
-    const workerName = `worker${Math.random()}`;
+    const workerName = `seesionWorker${Math.random()}`;
     const worker = new Worker('./js/HeartbeatWorker.js', {
       name: workerName,
     });
     worker.postMessage(meetInfo.CHID);
+  }
+
+  /**
+   * 在线心跳保持线程
+   */
+  function onlineHeartbeat() {
+    if (版本.显示端()) return;
+    const workerName = `onlineWorker${Math.random()}`;
+    const worker = new Worker('./js/OnlineHeartbeatWorker.js', {
+      name: workerName,
+    });
+    worker.postMessage({
+      hubsUrl,
+      meetInfo,
+    });
   }
 
   function initOnlineNumTimer() {
@@ -442,31 +458,34 @@ function leave() {
   try {
     rtc.leave();
   } catch (error) {}
-  let hasPre = false;
-  if (window.history.length > 1) hasPre = true;
-  function closeWindow() {
-    if (window.WeixinJSBridge) {
-      window.WeixinJSBridge.call('closeWindow');
+  if (window.WeixinJSBridge) {
+    if (
+      getUserInfo().Type == USER_TYPE.单位 ||
+      getUserInfo().Type == USER_TYPE.代表
+    ) {
+      window.history.back();
     } else {
-      if (
-        navigator.userAgent.indexOf('Firefox') != -1 ||
-        navigator.userAgent.indexOf('Chrome') != -1
-      ) {
-        window.location.href = 'about:blank';
+      window.history.go(-2);
+    }
+    // window.WeixinJSBridge.call('closeWindow');
+  } else {
+    if (
+      navigator.userAgent.indexOf('Firefox') != -1 ||
+      navigator.userAgent.indexOf('Chrome') != -1
+    ) {
+      window.location.href = 'about:blank';
+      window.close();
+    } else {
+      try {
+        window.opener = null;
+        window.open('', '_self');
         window.close();
-      } else {
-        try {
-          window.opener = null;
-          window.open('', '_self');
-          window.close();
-        } catch (error) {
-          window.open(location, '_self').close();
-        }
+      } catch (error) {
+        window.open(location, '_self').close();
       }
     }
-    window.top.close();
   }
-  hasPre ? window.history.go(0 - (window.history.length - 1)) : closeWindow();
+  window.top.close();
 }
 
 /**

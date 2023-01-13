@@ -423,7 +423,7 @@ class BaseChatHubClient {
               reCode: '25',
               ReUserid: meetInfo.CHID,
               ReUserQYBH: meetInfo.QYBH,
-              ReUserName: meetInfo.UserName,
+              ReUserName: meetInfo.XM,
               SendUserID: meetInfo.CHID,
               SendUserName: meetInfo.XM,
               Content: '',
@@ -516,7 +516,7 @@ class BaseChatHubClient {
               // 如果没有订阅任何人的音视频，将产生音频时长
               if (Object.keys(remoteVideoStats).length == 0) {
                 Data.Audio++;
-              } 
+              }
             } catch (error) {
               console.error('[getRemoteVideoStats] ', error);
             }
@@ -566,7 +566,7 @@ class BaseChatHubClient {
         ReUserQYBH: '',
         ReUserName: '',
         SendUserID: meetInfo.CHID,
-        SendUserName: meetInfo.UserName,
+        SendUserName: meetInfo.XM,
         Content: '',
         Data: { State: no + 1 },
       });
@@ -584,7 +584,7 @@ class BaseChatHubClient {
         ReUserQYBH: '',
         ReUserName: '',
         SendUserID: meetInfo.CHID,
-        SendUserName: meetInfo.UserName,
+        SendUserName: meetInfo.XM,
         Content: '',
         Data: { State: no + 1 },
       });

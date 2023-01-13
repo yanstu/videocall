@@ -22,7 +22,8 @@ function addView(userId) {
   for (let index = 0; index < roomDetail.UserList.length; index++) {
     const { ID, UserName } = roomDetail.UserList[index];
     if (
-      hasMe(ID) || ID == meetInfo.CHID ||
+      hasMe(ID) ||
+      ID == meetInfo.CHID ||
       roomDetail.SpeakerID == ID ||
       roomDetail.UserList.length <= 25
     ) {
@@ -39,7 +40,7 @@ async function change() {
   $('#zjr_box').attr('class', zjr_box_class);
 
   const newZJRID = roomDetail.SpeakerID || meetInfo.CHID;
-  const oldZJRID = ZJRID_
+  const oldZJRID = ZJRID_;
 
   // 先停止上一个主讲人的远程流
   const old_streams = rtc.members_.get(oldZJRID);
@@ -53,6 +54,9 @@ async function change() {
   if (newZJRID == meetInfo.CHID) {
     // 如果新的主讲人是我，清空小视频区域，将主持人添加到小视频区域
     resetViews();
+    if (meetInfo.IsZCR) {
+      $('#video-grid').hide();
+    }
     const zcr_stream = rtc.members_.get(ZCRID_);
     addView(ZCRID_);
     if (zcr_stream) {
@@ -72,6 +76,7 @@ async function change() {
       }
     }
   } else {
+    $('#video-grid').show();
     // 如果上一个主讲人是我
     if (oldZJRID == meetInfo.CHID) {
       resetViews();
@@ -92,7 +97,7 @@ async function change() {
   } else {
     $('#zjr_mask').show();
     // 用于判断当前主讲人是不是没有流推送但是在线，如果这样显示音频在线
-    const exits = userIsOnlineByHas(newZJRID)
+    const exits = userIsOnlineByHas(newZJRID);
     // const exits = await userIsOnlineByTRTC(newZJRID)
     // exits && zhezhaozhuangtai(true, newZJRID);
     exits && zhezhaozhuangtai('audio', newZJRID);
@@ -107,7 +112,7 @@ async function change() {
   rtc.shezhifenbianlv();
 
   showOrHide();
-  micRestore()
+  micRestore();
 
   chclient.redis.huoquyonghuzhuangtai();
 }
@@ -118,9 +123,12 @@ async function change() {
 async function init() {
   resetViews();
   if (ZJRID_ == meetInfo.CHID) {
-    var zcr_streams = rtc.members_.get(ZCRID_);
+    const zcr_streams = rtc.members_.get(ZCRID_);
     zcr_streams && zcr_streams.stop();
     addView(ZCRID_);
+    if (meetInfo.IsZCR) {
+      $('#video-grid').hide();
+    }
   } else {
     addView(meetInfo.CHID);
   }
@@ -134,10 +142,7 @@ $('#video-grid').on('click', () => {
   if ($('#video-grid > div').length > 0) {
     $('#video-grid').attr('class', zjr_box_class);
     $("[id^='box_']").attr('class', zjr_box_class);
-    $('#zjr_box').attr(
-      'class',
-      video_grid_class
-    );
+    $('#zjr_box').attr('class', video_grid_class);
     $('#zjr_box .mask div').css('font-size', '1rem');
     $('#video-grid .mask div').css('font-size', '2rem');
   }

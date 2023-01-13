@@ -9,7 +9,7 @@
  * @property {numbool} MicState 麦克风状态
  * @property {numbool} RECState 录制状态
  * @property {numbool} CameraSta 摄像头状态
- * @property {number} Type 用户类型
+ * @property {userType} Type 用户类型
  * @property {string} UserID 用户名
  * @property {string} UserName 用户名字
  * @property {string} UserQYBH 用户区域编号
@@ -24,6 +24,11 @@
  * @property {string} UserID 用户ID
  * @property {numbool} CameraState 摄像头状态
  * @property {numbool} MicState 麦克风状态
+ */
+
+/**
+ * 1|2|3|4
+ * @typedef {1|2|3|4} userType
  */
 
 /**
